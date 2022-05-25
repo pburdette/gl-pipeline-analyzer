@@ -36,6 +36,7 @@ const getQueuedDurationJobsData = (pipelineIid) => {
       pipeline(iid: "${pipelineIid}") {
         jobs {
           nodes {
+            name
             queuedDuration
           }
         }

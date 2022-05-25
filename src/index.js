@@ -5,6 +5,7 @@ const { program } = require('commander');
 const registerToken = require('./actions/registerToken');
 const registerProject = require('./actions/registerProject');
 const slowJobs = require('./actions/slowJobs');
+const queuedJobs = require('./actions/queuedJobs');
 
 program
   .name('gl-pipeline-analyzer')
@@ -28,5 +29,11 @@ program
   .description('Calculates the 10 slowest jobs in a pipeline')
   .argument('<pipeline-iid>', 'pipeline iid to analyze')
   .action(slowJobs);
+
+program
+  .command('queued-jobs')
+  .description('Calculates 10 jobs that spent the longest time waiting')
+  .argument('<pipeline-iid>', 'pipeline iid to analyze')
+  .action(queuedJobs);
 
 program.parse();

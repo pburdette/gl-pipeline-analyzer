@@ -1,9 +1,10 @@
 const { getSlowJobsData } = require('../helpers/api');
 const apiSafeGuard = require('../helpers/apiSafeGuard');
+const { LIMIT } = require('../constants');
 const chalk = require('chalk');
 
 module.exports = async (pipelineIid) => {
-  let limit = 10;
+  let limit = LIMIT;
 
   if (apiSafeGuard()) {
     try {
