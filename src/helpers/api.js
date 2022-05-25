@@ -10,20 +10,15 @@ const client = new GraphQLClient('https://gitlab.com/api/graphql', {
   headers: { Authorization: `Bearer ${token}` },
 });
 
-const getPipelineData = (pipelineIid) => {
+const getSlowJobsData = (pipelineIid) => {
   const query = gql`
     {
       project(fullPath: "${project}") {
         pipeline(iid: "${pipelineIid}") {
-          duration
-          status
           jobs {
             nodes {
               name
               duration
-              queuedDuration
-              startedAt
-              createdAt
             }
           }
         }
@@ -34,4 +29,23 @@ const getPipelineData = (pipelineIid) => {
   return client.request(query);
 };
 
-module.exports = getPipelineData;
+const getQueuedDurationJobsData = (pipelineIid) => {
+  const query = gql`
+  {
+    project(fullPath: "${project}") {
+      pipeline(iid: "${pipelineIid}") {
+        jobs {
+          nodes {
+            queuedDuration
+          }
+        }
+      }
+    }
+  }
+`;
+
+  return client.request(query);
+};
+
+exports.getSlowJobsData = getSlowJobsData;
+exports.getQueuedDurationJobsData = getQueuedDurationJobsData;
