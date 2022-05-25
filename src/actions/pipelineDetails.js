@@ -4,26 +4,32 @@ const chalk = require('chalk');
 
 module.exports = async (pipelineIid) => {
   if (apiSafeGuard()) {
+    let output;
+
     try {
       const {
         project: { pipeline },
       } = await getPipelineDetailsData(pipelineIid);
 
       if (pipeline.complete) {
-        console.log(`
+        output = `
         Pipeline iid: ${chalk.green(pipeline.iid)}
         Ran for ${chalk.yellow(pipeline.duration)} seconds
         Was queued for ${chalk.yellow(
           pipeline.queuedDuration
         )} seconds before starting
-        Has a status of "${pipeline.status}"
-      `);
+        Has a status of ${pipeline.status}
+      `;
       } else {
-        console.log(`
+        output = `
         Pipeline iid: ${chalk.green(pipeline.iid)}
-        Has a status of "${pipeline.status}"
-      `);
+        Has a status of ${pipeline.status}
+      `;
       }
+
+      console.log(output);
+
+      return output;
     } catch (error) {
       console.log(chalk.red(error));
     }

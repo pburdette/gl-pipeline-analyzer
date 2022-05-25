@@ -7,7 +7,7 @@
     "gl": "src/index.js"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "jest"
   },
   "author": "Payton D. Burdette",
   "license": "MIT",
@@ -22,5 +22,9 @@
     "conf": "^10.1.2",
     "graphql": "^16.5.0",
     "graphql-request": "^4.2.0"
+  },
+  "devDependencies": {
+    "jest": "^28.1.0",
+    "nock": "^13.2.4"
   }
 }
