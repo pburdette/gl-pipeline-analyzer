@@ -3,11 +3,19 @@
   "version": "1.0.0",
   "description": "CLI tool for analyzing GitLab pipelines",
   "main": "src/index.js",
+  "bin": {
+    "gl": "src/index.js"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Payton D. Burdette",
-  "license": "ISC",
+  "license": "MIT",
+  "repository": "pburdette/gl-pipeline-analyzer",
+  "keywords": [
+    "gitlab",
+    "pipeline"
+  ],
   "dependencies": {
     "chalk": "4.1.2",
     "commander": "^9.2.0",
