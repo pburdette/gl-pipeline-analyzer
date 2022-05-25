@@ -4,8 +4,11 @@ const { program } = require('commander');
 
 const registerToken = require('./actions/registerToken');
 const registerProject = require('./actions/registerProject');
-const slowJobs = require('./actions/slowJobs');
-const queuedJobs = require('./actions/queuedJobs');
+const jobStats = require('./actions/jobStats');
+const latestIid = require('./actions/latestIid');
+const pipelineDetails = require('./actions/pipelineDetails');
+
+const { SORT_BY_DURATION, SORT_BY_QUEUED_DURATION } = require('./constants');
 
 program
   .name('gl-pipeline-analyzer')
@@ -28,12 +31,27 @@ program
   .command('slow-jobs')
   .description('Calculates the 10 slowest jobs in a pipeline')
   .argument('<pipeline-iid>', 'pipeline iid to analyze')
-  .action(slowJobs);
+  .action((pipelineIid) => {
+    jobStats(pipelineIid, SORT_BY_DURATION);
+  });
 
 program
   .command('queued-jobs')
   .description('Calculates 10 jobs that spent the longest time waiting')
   .argument('<pipeline-iid>', 'pipeline iid to analyze')
-  .action(queuedJobs);
+  .action((pipelineIid) => {
+    jobStats(pipelineIid, SORT_BY_QUEUED_DURATION);
+  });
+
+program
+  .command('latest-iid')
+  .description('Find the latest pipeline iid')
+  .action(latestIid);
+
+program
+  .command('pipeline-details')
+  .description('Stats of the pipeline')
+  .argument('<pipeline-iid>', 'pipeline iid to analyze')
+  .action(pipelineDetails);
 
 program.parse();
