@@ -1,5 +1,4 @@
 const nock = require('nock');
-const chalk = require('chalk');
 const pipelineDetails = require('../../src/actions/pipelineDetails');
 
 console.log = jest.fn();
