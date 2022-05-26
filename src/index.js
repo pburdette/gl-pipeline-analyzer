@@ -12,8 +12,7 @@ const { SORT_BY_DURATION, SORT_BY_QUEUED_DURATION } = require('./constants');
 
 program
   .name('gl-pipeline-analyzer')
-  .description('CLI tool for analyzing GitLab pipelines')
-  .version('1.0.0');
+  .description('CLI tool for analyzing GitLab pipelines');
 
 program
   .command('register-token')
