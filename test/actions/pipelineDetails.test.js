@@ -10,6 +10,10 @@ jest.mock('chalk', () => ({
   yellow: jest.fn((str) => str),
 }));
 
+jest.mock('../../src/helpers/apiSafeGuard', () =>
+  jest.fn().mockReturnValue(true)
+);
+
 describe('pipelineDetails', () => {
   it('when pipeline is complete', async () => {
     nock('https://gitlab.com')
