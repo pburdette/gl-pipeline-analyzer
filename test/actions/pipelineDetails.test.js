@@ -1,7 +1,6 @@
 const nock = require('nock');
 const chalk = require('chalk');
 const pipelineDetails = require('../../src/actions/pipelineDetails');
-const { trimText } = require('../testUtils');
 
 console.log = jest.fn();
 
@@ -30,14 +29,11 @@ describe('pipelineDetails', () => {
       });
 
     const output = await pipelineDetails(20);
-    const expectedOutput = `
-      Pipeline iid: 20
-      Ran for 1000 seconds
-      Was queued for 100 seconds before starting
-      Has a status of SUCCESS
-    `;
 
-    expect(trimText(output)).toBe(trimText(expectedOutput));
+    expect(output).toContain('Pipeline iid: 20');
+    expect(output).toContain('Ran for 1000 seconds');
+    expect(output).toContain('Was queued for 100 seconds before starting');
+    expect(output).toContain('Has a status of SUCCESS');
   });
 
   it('when pipeline is not complete', async () => {
@@ -58,11 +54,10 @@ describe('pipelineDetails', () => {
       });
 
     const output = await pipelineDetails(20);
-    const expectedOutput = `
-    Pipeline iid: 26
-    Has a status of RUNNING
-  `;
 
-    expect(trimText(output)).toBe(trimText(expectedOutput));
+    expect(output).toContain('Pipeline iid: 26');
+    expect(output).toContain('Has a status of RUNNING');
+    expect(output).not.toContain('Ran for');
+    expect(output).not.toContain('Was queued for');
   });
 });
