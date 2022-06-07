@@ -1,4 +1,5 @@
 # gl-pipeline-analyzer
+[![Downloads](https://badgen.net/npm/dt/gl-pipeline-analyzer)](https://www.npmjs.com/package/gl-pipeline-analyzer)
 
 📈 A CLI tool to analyze GitLab Pipelines
 
